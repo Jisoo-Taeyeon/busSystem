@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lihu.dao.CourseLessonDao">
+    <!-- 结果集 -->
+    <resultMap type="com.lihu.entity.CourseLesson" id="CourseLessonMap">
+        <result property="id" column="id" jdbcType="OTHER"/>
+        <result property="courseId" column="course_id" jdbcType="INTEGER"/>
+        <result property="sectionId" column="section_id" jdbcType="INTEGER"/>
+        <result property="theme" column="theme" jdbcType="VARCHAR"/>
+        <result property="duration" column="duration" jdbcType="INTEGER"/>
+        <result property="isFree" column="is_free" jdbcType="OTHER"/>
+        <result property="startImgUrl" column="start_img_url" jdbcType="VARCHAR"/>
+        <result property="textContent" column="text_content" jdbcType="OTHER"/>
+        <result property="markdownTextContent" column="markdown_text_content" jdbcType="OTHER"/>
+        <result property="transcode" column="transcode" jdbcType="VARCHAR"/>
+        <result property="resourceUrl" column="resource_url" jdbcType="VARCHAR"/>
+        <result property="lastOperatorId" column="last_operator_id" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="isDel" column="is_del" jdbcType="OTHER"/>
+        <result property="orderNum" column="order_num" jdbcType="INTEGER"/>
+        <result property="aliFileUrl" column="ali_file_url" jdbcType="VARCHAR"/>
+        <result property="aliFileDk" column="ali_file_dk" jdbcType="VARCHAR"/>
+        <result property="aliFileEdk" column="ali_file_edk" jdbcType="VARCHAR"/>
+        <result property="aliFileVid" column="ali_file_vid" jdbcType="VARCHAR"/>
+        <result property="status" column="status" jdbcType="INTEGER"/>
+        <result property="isTimingPublish" column="is_timing_publish" jdbcType="OTHER"/>
+        <result property="publishTime" column="publish_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    
+    <!-- 基本字段 -->
+    <sql id="Base_Column_List">
+        id, course_id, section_id, theme, duration, is_free, start_img_url, text_content, markdown_text_content, transcode, resource_url, last_operator_id, create_time, update_time, is_del, order_num, ali_file_url, ali_file_dk, ali_file_edk, ali_file_vid, status, is_timing_publish, publish_time    </sql>
+    
+    <!-- 查询单个 -->
+    <select id="selectById" resultMap="CourseLessonMap">
+        select
+          <include refid="Base_Column_List" />
+        from course_lesson
+        where id = #{id}
+    </select>
+
+    <!-- 分页查询 -->
+    <select id="selectPage" resultMap="CourseLessonMap">
+        select
+        <include refid="Base_Column_List" />
+        from course_lesson
+        limit #{start},#{limit}
+    </select>
+
+    <!-- 查询全部 -->
+    <select id="selectAll" resultMap="CourseLessonMap">
+        select
+        <include refid="Base_Column_List" />
+        from course_lesson
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="selectList" resultMap="CourseLessonMap">
+        select
+        <include refid="Base_Column_List" />
+        from course_lesson
+        <where>
+                    <if test="id != null">
+                and id = #{id}
+            </if>
+                    <if test="courseId != null">
+                and course_id = #{courseId}
+            </if>
+                    <if test="sectionId != null">
+                and section_id = #{sectionId}
+            </if>
+                    <if test="theme != null and theme != ''">
+                and theme = #{theme}
+            </if>
+                    <if test="duration != null">
+                and duration = #{duration}
+            </if>
+                    <if test="isFree != null">
+                and is_free = #{isFree}
+            </if>
+                    <if test="startImgUrl != null and startImgUrl != ''">
+                and start_img_url = #{startImgUrl}
+            </if>
+                    <if test="textContent != null">
+                and text_content = #{textContent}
+            </if>
+                    <if test="markdownTextContent != null">
+                and markdown_text_content = #{markdownTextContent}
+            </if>
+                    <if test="transcode != null and transcode != ''">
+                and transcode = #{transcode}
+            </if>
+                    <if test="resourceUrl != null and resourceUrl != ''">
+                and resource_url = #{resourceUrl}
+            </if>
+                    <if test="lastOperatorId != null">
+                and last_operator_id = #{lastOperatorId}
+            </if>
+                    <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+                    <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+                    <if test="isDel != null">
+                and is_del = #{isDel}
+            </if>
+                    <if test="orderNum != null">
+                and order_num = #{orderNum}
+            </if>
+                    <if test="aliFileUrl != null and aliFileUrl != ''">
+                and ali_file_url = #{aliFileUrl}
+            </if>
+                    <if test="aliFileDk != null and aliFileDk != ''">
+                and ali_file_dk = #{aliFileDk}
+            </if>
+                    <if test="aliFileEdk != null and aliFileEdk != ''">
+                and ali_file_edk = #{aliFileEdk}
+            </if>
+                    <if test="aliFileVid != null and aliFileVid != ''">
+                and ali_file_vid = #{aliFileVid}
+            </if>
+                    <if test="status != null">
+                and status = #{status}
+            </if>
+                    <if test="isTimingPublish != null">
+                and is_timing_publish = #{isTimingPublish}
+            </if>
+                    <if test="publishTime != null">
+                and publish_time = #{publishTime}
+            </if>
+                </where>
+    </select>
+
+    <!-- 新增所有列 -->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into course_lesson(id, course_id, section_id, theme, duration, is_free, start_img_url, text_content, markdown_text_content, transcode, resource_url, last_operator_id, create_time, update_time, is_del, order_num, ali_file_url, ali_file_dk, ali_file_edk, ali_file_vid, status, is_timing_publish, publish_time)
+        values ( #{id}, #{courseId}, #{sectionId}, #{theme}, #{duration}, #{isFree}, #{startImgUrl}, #{textContent}, #{markdownTextContent}, #{transcode}, #{resourceUrl}, #{lastOperatorId}, #{createTime}, #{updateTime}, #{isDel}, #{orderNum}, #{aliFileUrl}, #{aliFileDk}, #{aliFileEdk}, #{aliFileVid}, #{status}, #{isTimingPublish}, #{publishTime})
+    </insert>
+    
+    <!-- 批量新增 -->
+    <insert id="batchInsert">
+        insert into course_lesson(id, course_id, section_id, theme, duration, is_free, start_img_url, text_content, markdown_text_content, transcode, resource_url, last_operator_id, create_time, update_time, is_del, order_num, ali_file_url, ali_file_dk, ali_file_edk, ali_file_vid, status, is_timing_publish, publish_time)
+        values 
+        <foreach collection="courseLessons" item="item" index="index" separator=",">
+        (
+                        #{item.id},             #{item.courseId},             #{item.sectionId},             #{item.theme},             #{item.duration},             #{item.isFree},             #{item.startImgUrl},             #{item.textContent},             #{item.markdownTextContent},             #{item.transcode},             #{item.resourceUrl},             #{item.lastOperatorId},             #{item.createTime},             #{item.updateTime},             #{item.isDel},             #{item.orderNum},             #{item.aliFileUrl},             #{item.aliFileDk},             #{item.aliFileEdk},             #{item.aliFileVid},             #{item.status},             #{item.isTimingPublish},             #{item.publishTime}         )
+         </foreach>
+    </insert>
+
+    <!-- 通过主键修改数据 -->
+    <update id="update">
+        update lagou_edu.course_lesson
+        <set>
+                    <if test="courseId != null">
+                course_id = #{courseId},
+            </if>
+                    <if test="sectionId != null">
+                section_id = #{sectionId},
+            </if>
+                    <if test="theme != null and theme != ''">
+                theme = #{theme},
+            </if>
+                    <if test="duration != null">
+                duration = #{duration},
+            </if>
+                    <if test="isFree != null">
+                is_free = #{isFree},
+            </if>
+                    <if test="startImgUrl != null and startImgUrl != ''">
+                start_img_url = #{startImgUrl},
+            </if>
+                    <if test="textContent != null">
+                text_content = #{textContent},
+            </if>
+                    <if test="markdownTextContent != null">
+                markdown_text_content = #{markdownTextContent},
+            </if>
+                    <if test="transcode != null and transcode != ''">
+                transcode = #{transcode},
+            </if>
+                    <if test="resourceUrl != null and resourceUrl != ''">
+                resource_url = #{resourceUrl},
+            </if>
+                    <if test="lastOperatorId != null">
+                last_operator_id = #{lastOperatorId},
+            </if>
+                    <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+                    <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+                    <if test="isDel != null">
+                is_del = #{isDel},
+            </if>
+                    <if test="orderNum != null">
+                order_num = #{orderNum},
+            </if>
+                    <if test="aliFileUrl != null and aliFileUrl != ''">
+                ali_file_url = #{aliFileUrl},
+            </if>
+                    <if test="aliFileDk != null and aliFileDk != ''">
+                ali_file_dk = #{aliFileDk},
+            </if>
+                    <if test="aliFileEdk != null and aliFileEdk != ''">
+                ali_file_edk = #{aliFileEdk},
+            </if>
+                    <if test="aliFileVid != null and aliFileVid != ''">
+                ali_file_vid = #{aliFileVid},
+            </if>
+                    <if test="status != null">
+                status = #{status},
+            </if>
+                    <if test="isTimingPublish != null">
+                is_timing_publish = #{isTimingPublish},
+            </if>
+                    <if test="publishTime != null">
+                publish_time = #{publishTime},
+            </if>
+                </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from course_lesson where id = #{id}
+    </delete>
+    
+    <!-- 总数 -->
+    <select id="count" resultType="int">
+        select count(*) from course_lesson
+    </select>
+</mapper>

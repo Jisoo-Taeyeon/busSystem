@@ -1,0 +1,17 @@
+server:
+  port: 8090
+  servlet:
+    context-path: /
+
+## 数据库连接
+spring:
+  datasource:
+    name: druid
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://localhost:3306/lagou_edu?characterEncoding=utf-8&serverTimezone=UTC
+    username: root
+    password: 2292410586
+
+#mybatis配置
+mybatis:
+  mapper-locations: classpath:mapper/*Dao.xml
