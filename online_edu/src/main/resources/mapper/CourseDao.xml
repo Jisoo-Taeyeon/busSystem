@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssm.dao.CourseDao">
+    <!-- 结果集 -->
+    <resultMap type="com.ssm.entity.Course" id="CourseMap">
+        <result property="id" column="id" jdbcType="OTHER"/>
+        <result property="courseName" column="course_name" jdbcType="VARCHAR"/>
+        <result property="brief" column="brief" jdbcType="VARCHAR"/>
+        <result property="teacherName" column="teacher_name" jdbcType="VARCHAR"/>
+        <result property="teacherInfo" column="teacher_info" jdbcType="VARCHAR"/>
+        <result property="totalCourseTime" column="total_course_time" jdbcType="INTEGER"/>
+        <result property="sales" column="sales" jdbcType="INTEGER"/>
+        <result property="actualSales" column="actual_sales" jdbcType="INTEGER"/>
+        <result property="price" column="price" jdbcType="OTHER"/>
+        <result property="priceTag" column="price_tag" jdbcType="VARCHAR"/>
+        <result property="discounts" column="discounts" jdbcType="OTHER"/>
+        <result property="courseDescription" column="course_description" jdbcType="OTHER"/>
+        <result property="courseImgUrl" column="course_img_url" jdbcType="VARCHAR"/>
+        <result property="isNew" column="is_new" jdbcType="OTHER"/>
+        <result property="isNewDes" column="is_new_des" jdbcType="VARCHAR"/>
+        <result property="lastOperatorId" column="last_operator_id" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="isDel" column="is_del" jdbcType="OTHER"/>
+        <result property="totalDuration" column="total_duration" jdbcType="INTEGER"/>
+        <result property="shareTitle" column="share_title" jdbcType="VARCHAR"/>
+        <result property="shareDescription" column="share_description" jdbcType="VARCHAR"/>
+        <result property="shareImageTitle" column="share_image_title" jdbcType="VARCHAR"/>
+        <result property="status" column="status" jdbcType="INTEGER"/>
+        <result property="sortNum" column="sort_num" jdbcType="INTEGER"/>
+        <result property="courseType" column="course_type" jdbcType="OTHER"/>
+        <result property="lastNoticeTime" column="last_notice_time" jdbcType="TIMESTAMP"/>
+        <result property="previewFirstField" column="preview_first_field" jdbcType="VARCHAR"/>
+        <result property="previewSecondField" column="preview_second_field" jdbcType="VARCHAR"/>
+        <result property="isGray" column="is_gray" jdbcType="OTHER"/>
+        <result property="grade" column="grade" jdbcType="OTHER"/>
+    </resultMap>
+    
+    <!-- 基本字段 -->
+    <sql id="Base_Column_List">
+        id, course_name, brief, teacher_name, teacher_info, total_course_time, sales, actual_sales, price, price_tag, discounts, course_description, course_img_url, is_new, is_new_des, last_operator_id, create_time, update_time, is_del, total_duration, share_title, share_description, share_image_title, status, sort_num, course_type, last_notice_time, preview_first_field, preview_second_field, is_gray, grade    </sql>
+    
+    <!-- 查询单个 -->
+    <select id="selectById" resultMap="CourseMap">
+        select
+          <include refid="Base_Column_List" />
+        from course
+        where id = #{id}
+    </select>
+
+    <!-- 分页查询 -->
+    <select id="selectPage" resultMap="CourseMap">
+        select
+        <include refid="Base_Column_List" />
+        from course
+        limit #{start},#{limit}
+    </select>
+
+    <!-- 查询全部 -->
+    <select id="selectAll" resultMap="CourseMap">
+        select
+        <include refid="Base_Column_List" />
+        from course
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="selectList" resultMap="CourseMap">
+        select
+        <include refid="Base_Column_List" />
+        from course
+        <where>
+                    <if test="id != null">
+                and id = #{id}
+            </if>
+                    <if test="courseName != null and courseName != ''">
+                and course_name = #{courseName}
+            </if>
+                    <if test="brief != null and brief != ''">
+                and brief = #{brief}
+            </if>
+                    <if test="teacherName != null and teacherName != ''">
+                and teacher_name = #{teacherName}
+            </if>
+                    <if test="teacherInfo != null and teacherInfo != ''">
+                and teacher_info = #{teacherInfo}
+            </if>
+                    <if test="totalCourseTime != null">
+                and total_course_time = #{totalCourseTime}
+            </if>
+                    <if test="sales != null">
+                and sales = #{sales}
+            </if>
+                    <if test="actualSales != null">
+                and actual_sales = #{actualSales}
+            </if>
+                    <if test="price != null">
+                and price = #{price}
+            </if>
+                    <if test="priceTag != null and priceTag != ''">
+                and price_tag = #{priceTag}
+            </if>
+                    <if test="discounts != null">
+                and discounts = #{discounts}
+            </if>
+                    <if test="courseDescription != null">
+                and course_description = #{courseDescription}
+            </if>
+                    <if test="courseImgUrl != null and courseImgUrl != ''">
+                and course_img_url = #{courseImgUrl}
+            </if>
+                    <if test="isNew != null">
+                and is_new = #{isNew}
+            </if>
+                    <if test="isNewDes != null and isNewDes != ''">
+                and is_new_des = #{isNewDes}
+            </if>
+                    <if test="lastOperatorId != null">
+                and last_operator_id = #{lastOperatorId}
+            </if>
+                    <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+                    <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+                    <if test="isDel != null">
+                and is_del = #{isDel}
+            </if>
+                    <if test="totalDuration != null">
+                and total_duration = #{totalDuration}
+            </if>
+                    <if test="shareTitle != null and shareTitle != ''">
+                and share_title = #{shareTitle}
+            </if>
+                    <if test="shareDescription != null and shareDescription != ''">
+                and share_description = #{shareDescription}
+            </if>
+                    <if test="shareImageTitle != null and shareImageTitle != ''">
+                and share_image_title = #{shareImageTitle}
+            </if>
+                    <if test="status != null">
+                and status = #{status}
+            </if>
+                    <if test="sortNum != null">
+                and sort_num = #{sortNum}
+            </if>
+                    <if test="courseType != null">
+                and course_type = #{courseType}
+            </if>
+                    <if test="lastNoticeTime != null">
+                and last_notice_time = #{lastNoticeTime}
+            </if>
+                    <if test="previewFirstField != null and previewFirstField != ''">
+                and preview_first_field = #{previewFirstField}
+            </if>
+                    <if test="previewSecondField != null and previewSecondField != ''">
+                and preview_second_field = #{previewSecondField}
+            </if>
+                    <if test="isGray != null">
+                and is_gray = #{isGray}
+            </if>
+                    <if test="grade != null">
+                and grade = #{grade}
+            </if>
+                </where>
+    </select>
+
+    <!-- 新增所有列 -->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into course(id, course_name, brief, teacher_name, teacher_info, total_course_time, sales, actual_sales, price, price_tag, discounts, course_description, course_img_url, is_new, is_new_des, last_operator_id, create_time, update_time, is_del, total_duration, share_title, share_description, share_image_title, status, sort_num, course_type, last_notice_time, preview_first_field, preview_second_field, is_gray, grade)
+        values ( #{id}, #{courseName}, #{brief}, #{teacherName}, #{teacherInfo}, #{totalCourseTime}, #{sales}, #{actualSales}, #{price}, #{priceTag}, #{discounts}, #{courseDescription}, #{courseImgUrl}, #{isNew}, #{isNewDes}, #{lastOperatorId}, #{createTime}, #{updateTime}, #{isDel}, #{totalDuration}, #{shareTitle}, #{shareDescription}, #{shareImageTitle}, #{status}, #{sortNum}, #{courseType}, #{lastNoticeTime}, #{previewFirstField}, #{previewSecondField}, #{isGray}, #{grade})
+    </insert>
+    
+    <!-- 批量新增 -->
+    <insert id="batchInsert">
+        insert into course(id, course_name, brief, teacher_name, teacher_info, total_course_time, sales, actual_sales, price, price_tag, discounts, course_description, course_img_url, is_new, is_new_des, last_operator_id, create_time, update_time, is_del, total_duration, share_title, share_description, share_image_title, status, sort_num, course_type, last_notice_time, preview_first_field, preview_second_field, is_gray, grade)
+        values 
+        <foreach collection="courses" item="item" index="index" separator=",">
+        (
+                        #{item.id},             #{item.courseName},             #{item.brief},             #{item.teacherName},             #{item.teacherInfo},             #{item.totalCourseTime},             #{item.sales},             #{item.actualSales},             #{item.price},             #{item.priceTag},             #{item.discounts},             #{item.courseDescription},             #{item.courseImgUrl},             #{item.isNew},             #{item.isNewDes},             #{item.lastOperatorId},             #{item.createTime},             #{item.updateTime},             #{item.isDel},             #{item.totalDuration},             #{item.shareTitle},             #{item.shareDescription},             #{item.shareImageTitle},             #{item.status},             #{item.sortNum},             #{item.courseType},             #{item.lastNoticeTime},             #{item.previewFirstField},             #{item.previewSecondField},             #{item.isGray},             #{item.grade}         )
+         </foreach>
+    </insert>
+
+    <!-- 通过主键修改数据 -->
+    <update id="update">
+        update lagou_edu.course
+        <set>
+                    <if test="courseName != null and courseName != ''">
+                course_name = #{courseName},
+            </if>
+                    <if test="brief != null and brief != ''">
+                brief = #{brief},
+            </if>
+                    <if test="teacherName != null and teacherName != ''">
+                teacher_name = #{teacherName},
+            </if>
+                    <if test="teacherInfo != null and teacherInfo != ''">
+                teacher_info = #{teacherInfo},
+            </if>
+                    <if test="totalCourseTime != null">
+                total_course_time = #{totalCourseTime},
+            </if>
+                    <if test="sales != null">
+                sales = #{sales},
+            </if>
+                    <if test="actualSales != null">
+                actual_sales = #{actualSales},
+            </if>
+                    <if test="price != null">
+                price = #{price},
+            </if>
+                    <if test="priceTag != null and priceTag != ''">
+                price_tag = #{priceTag},
+            </if>
+                    <if test="discounts != null">
+                discounts = #{discounts},
+            </if>
+                    <if test="courseDescription != null">
+                course_description = #{courseDescription},
+            </if>
+                    <if test="courseImgUrl != null and courseImgUrl != ''">
+                course_img_url = #{courseImgUrl},
+            </if>
+                    <if test="isNew != null">
+                is_new = #{isNew},
+            </if>
+                    <if test="isNewDes != null and isNewDes != ''">
+                is_new_des = #{isNewDes},
+            </if>
+                    <if test="lastOperatorId != null">
+                last_operator_id = #{lastOperatorId},
+            </if>
+                    <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+                    <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+                    <if test="isDel != null">
+                is_del = #{isDel},
+            </if>
+                    <if test="totalDuration != null">
+                total_duration = #{totalDuration},
+            </if>
+                    <if test="shareTitle != null and shareTitle != ''">
+                share_title = #{shareTitle},
+            </if>
+                    <if test="shareDescription != null and shareDescription != ''">
+                share_description = #{shareDescription},
+            </if>
+                    <if test="shareImageTitle != null and shareImageTitle != ''">
+                share_image_title = #{shareImageTitle},
+            </if>
+                    <if test="status != null">
+                status = #{status},
+            </if>
+                    <if test="sortNum != null">
+                sort_num = #{sortNum},
+            </if>
+                    <if test="courseType != null">
+                course_type = #{courseType},
+            </if>
+                    <if test="lastNoticeTime != null">
+                last_notice_time = #{lastNoticeTime},
+            </if>
+                    <if test="previewFirstField != null and previewFirstField != ''">
+                preview_first_field = #{previewFirstField},
+            </if>
+                    <if test="previewSecondField != null and previewSecondField != ''">
+                preview_second_field = #{previewSecondField},
+            </if>
+                    <if test="isGray != null">
+                is_gray = #{isGray},
+            </if>
+                    <if test="grade != null">
+                grade = #{grade},
+            </if>
+                </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from course where id = #{id}
+    </delete>
+    
+    <!-- 总数 -->
+    <select id="count" resultType="int">
+        select count(*) from course
+    </select>
+</mapper>
