@@ -9,17 +9,17 @@ import java.util.Map;
  * (User)表数据库访问层
  *
  * @author makejava
- * @since 2022-04-17 23:23:28
+ * @since 2022-04-17 23:34:36
  */
 public interface UserDao {
 
     /**
      * 通过ID查询单条数据
      *
-     * @param  主键
+     * @param id 主键
      * @return 实例对象
      */
-    User selectById( );
+    User selectById(Integer id);
 	
     /**
      * 分页查询
@@ -72,10 +72,10 @@ public interface UserDao {
     /**
      * 通过主键删除数据
      *
-     * @param  主键
+     * @param id 主键
      * @return 影响行数
      */
-    int deleteById( );
+    int deleteById(Integer id);
 
     /**
      * 查询总数据数

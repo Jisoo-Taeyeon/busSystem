@@ -13,7 +13,7 @@ import java.util.Map;
  * (User表)服务实现类
  *
  * @author makejava
- * @since 2022-04-17 23:23:29
+ * @since 2022-04-17 23:34:45
  */
 @Service("userService")
 public class UserServiceImpl implements UserService {
@@ -23,12 +23,12 @@ public class UserServiceImpl implements UserService {
     /**
      * 通过ID查询单条数据
      *
-     * @param  主键
+     * @param id 主键
      * @return 实例对象
      */
     @Override
-    public User selectById( ) {
-        return this.userDao.selectById();
+    public User selectById(Integer id) {
+        return this.userDao.selectById(id);
     }
 
     /**
@@ -94,18 +94,18 @@ public class UserServiceImpl implements UserService {
     @Override
     public User update(User user) {
         this.userDao.update(user);
-        return this.selectById(user.get());
+        return this.selectById(user.getId());
     }
 
     /**
      * 通过主键删除数据
      *
-     * @param  主键
+     * @param id 主键
      * @return 是否成功
      */
     @Override
-    public int deleteById( ) {
-        return this.userDao.deleteById();
+    public int deleteById(Integer id) {
+        return this.userDao.deleteById(id);
     }
     
     /**

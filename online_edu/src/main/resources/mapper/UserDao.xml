@@ -27,7 +27,7 @@
         select
           <include refid="Base_Column_List" />
         from user
-        where  = #{}
+        where id = #{id}
     </select>
 
     <!-- 分页查询 -->
@@ -94,7 +94,7 @@
     </select>
 
     <!-- 新增所有列 -->
-    <insert id="insert" keyProperty="" useGeneratedKeys="true">
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
         insert into user(id, name, portrait, phone, password, reg_ip, account_non_expired, credentials_non_expired, account_non_locked, status, is_del, create_time, update_time)
         values ( #{id}, #{name}, #{portrait}, #{phone}, #{password}, #{regIp}, #{accountNonExpired}, #{credentialsNonExpired}, #{accountNonLocked}, #{status}, #{isDel}, #{createTime}, #{updateTime})
     </insert>
@@ -113,9 +113,6 @@
     <update id="update">
         update lagou_edu.user
         <set>
-                    <if test="id != null">
-                id = #{id},
-            </if>
                     <if test="name != null and name != ''">
                 name = #{name},
             </if>
@@ -153,12 +150,12 @@
                 update_time = #{updateTime},
             </if>
                 </set>
-        where  = #{}
+        where id = #{id}
     </update>
 
     <!--通过主键删除-->
     <delete id="deleteById">
-        delete from user where  = #{}
+        delete from user where id = #{id}
     </delete>
     
     <!-- 总数 -->
