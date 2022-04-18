@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * (CourseSection)实体类
+ * (CourseSection)实体类  课程章节表
  *
  * @author makejava
  * @since 2022-04-14 13:47:09

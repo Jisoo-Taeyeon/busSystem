@@ -49,4 +49,15 @@ public class CourseController {
         List<Course> courses = courseService.selectPage(1,3);
         return courses;
     }
+
+    /**
+     * 测试 通过主键删除数据
+     * @return
+     */
+    @RequestMapping("/test3")
+    public void test3(int i){
+        courseService.deleteById(i);
+    }
+
+
 }
